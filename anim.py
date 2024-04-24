@@ -1,6 +1,4 @@
 import pygame
-import sys
-import time
 import math
 
 g = 9.8
@@ -8,8 +6,7 @@ g = 9.8
 class co2:
     x, y, r, angle = 0, 0, 0, 0
     x1, y1, x2, y2, rchast = 0, 0, 0, 0, 0
-    # uy = 2 * math.sin(math.pi/4)
-    dx, dy = 2, 2
+    dx, dy = 4, 4
     k = 1
     def __init__(self,  x, y, r, rchast):
         self.x = x 
@@ -38,7 +35,7 @@ class co2:
 width, height = 800, 650
 fps = 30
 running = True
-mol = co2(50, 10, 25, 15)
+mol = co2(150, 10, 25, 15)
 pygame.init()
 
 screen = pygame.display.set_mode((width, height))
@@ -51,11 +48,14 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    screen.fill((0,0,0))
+    screen.fill((128,128,128))
     pygame.draw.circle(screen, mol.color, (mol.x, mol.y), mol.r)
     pygame.draw.circle(screen, (255,255,255), (mol.x1, mol.y1), mol.rchast)
     pygame.draw.circle(screen, (255,255,255), (mol.x2, mol.y2), mol.rchast)
-    pygame.draw.rect(screen, (255, 215, 0), (200, 500, 200, 100))
+    pygame.draw.rect(screen, (255, 215, 0), (300, 500, 200, 100))
+    font = pygame.font.SysFont('Arial', 48)
+    txt = font.render("ЗОЛОТО", False, (0,0,0))
+    screen.blit(txt, (320,520))
     mol.move_mol()
     mol.set_angle()
     print(mol.angle, (mol.x1, mol.y1), (mol.x2, mol.y2))
